@@ -8,11 +8,9 @@
     xmlns:data="using:UWPDataBindingDemo.BookData"
     
     mc:Ignorable="d">
-
+    <!--全局数据绑定-->
     <Page.Resources>
-
-        <!--重用data template-->
-        <DataTemplate x:DataType="data:Book" x:Key="BookDataTemplate">
+        <DataTemplate x:DataType="data:Book" x:Key="MyDataTemplete">
             <StackPanel Orientation="Vertical">
                 <Image Width="140" Source="{x:Bind ImageCover}" Height="240"></Image>
                 <TextBlock FontSize="16" HorizontalAlignment="Center" Text="{x:Bind Name}"></TextBlock>
@@ -20,7 +18,6 @@
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
-    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -28,26 +25,37 @@
         </Grid.RowDefinitions>
 
         <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+           
             <GridView ItemsSource="{x:Bind Books}" 
                   IsItemClickEnabled="True" 
                   ItemClick="GridView_ItemClick"
-                  ItemTemplate="{StaticResource BookDataTemplate}">
+                 >
+                <!-- ItemTemplate="{StaticResource MyDataTemplete}" 可以绑定数据-->
+                
+                <!--******************USER CONTROL******************-->
+                <!--使用usercontrol时 这个book对象会传入usercontrol datacontext对象中 一个网格一个booktemplated-->
+                <GridView.ItemTemplate >
+                    <DataTemplate>
+                        <local:BookTemplated HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></local:BookTemplated>
+                    </DataTemplate>
+                </GridView.ItemTemplate >
+
+                <!--******************局部数据绑定*****************-->                
                 <!--"{ x:Bind Books}"告诉grid view要绑定的数据是个啥 这个新定义的类型是Books是我们getBooks的返回值 见后台-->
-                <!-- x:DataType="data:Book"告诉gridview 每个网格要绑定的数据类型-->
-                <!--
-            <GridView.ItemTemplate >
-                <DataTemplate x:DataType="data:Book">  
-                    <StackPanel Orientation="Vertical">
-                        <Image Width="140" Source="{x:Bind ImageCover}" Height="240"></Image>
-                        <TextBlock FontSize="16" HorizontalAlignment="Center" Text="{x:Bind Name}"></TextBlock>
-                        <TextBlock FontSize="12" HorizontalAlignment="Center" Text="{x:Bind Author}"></TextBlock>
-                </StackPanel>
-            </DataTemplate>
-            </GridView.ItemTemplate>
-            -->
+                <!-- x:DataType="data:Book"告诉gridview 每个网格要绑定的数据类型-->                              
+            <!--<GridView.ItemTemplate >
+                    <DataTemplate x:DataType="data:Book">  
+                        <StackPanel Orientation="Vertical">
+                            <Image Width="140" Source="{x:Bind ImageCover}" Height="240"></Image>
+                            <TextBlock FontSize="16" HorizontalAlignment="Center" Text="{x:Bind Name}"></TextBlock>
+                            <TextBlock FontSize="12" HorizontalAlignment="Center" Text="{x:Bind Author}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </GridView.ItemTemplate>-->
+            
             </GridView>
         </Grid>
-        <TextBlock Width="120" Height="60" Grid.Row="1" HorizontalAlignment="Left" Name="SelectedBook" TextWrapping="Wrap"></TextBlock>    
+        <TextBlock Width="120" Height="130" Grid.Row="1" HorizontalAlignment="Left" Name="SelectedBook" TextWrapping="Wrap"></TextBlock>    
         <StackPanel Grid.Row="1" HorizontalAlignment="Center">
            
             <TextBox Name="BookName" HorizontalAlignment="Center" Width="150" Text="Enter Book Name"></TextBox>

@@ -38,7 +38,8 @@ namespace UWPDataBindingDemo
         {
             // 2个参数 sender 是点击的控件对象 e是控件对象绑定的对象
             var book = (Book)e.ClickedItem;
-            SelectedBook.Text = "You selected " + book.Name;
+            SelectedBook.Text = "You selected " + book.Name +"\n"+ book.ImageCover;
+
         }
 
         private void AddBt_Click(object sender, RoutedEventArgs e)

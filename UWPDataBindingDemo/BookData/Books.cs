@@ -24,7 +24,7 @@ namespace UWPDataBindingDemo.BookData
         public static ObservableCollection<Book> getBooks()
         {
             var bookList = new ObservableCollection<Book>();
-            bookList.Add(new Book { ImageCover = @"Assets/bookCovers/book1.jpg", Name = "ADAPTIVE WEB DESIGN", Author = "Aaron Gustafson" });
+            bookList.Add(new Book { ImageCover = "/Assets/bookCovers/book1.jpg", Name = "ADAPTIVE WEB DESIGN", Author = "Aaron Gustafson" });
             bookList.Add(new Book { ImageCover = @"Assets/bookCovers/book2.jpg", Name = "The Doctor In War", Author = "Woods Hutchinson" });
             bookList.Add(new Book { ImageCover = @"Assets/bookCovers/book3.jpg", Name = "Mysterious", Author = "John Doe" });
             bookList.Add(new Book { ImageCover = @"Assets/bookCovers/book4.jpg", Name = "Harry Potter", Author = "J.K. Rowling" });
