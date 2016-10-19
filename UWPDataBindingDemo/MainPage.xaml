@@ -25,7 +25,6 @@
         </Grid.RowDefinitions>
 
         <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-           
             <GridView ItemsSource="{x:Bind Books}" 
                   IsItemClickEnabled="True" 
                   ItemClick="GridView_ItemClick"
@@ -75,6 +74,12 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <Button Click="AddBt_Click" Name="AddBt" HorizontalAlignment="Center" Content="Add Book"></Button>
+
+        </StackPanel>
+
+        <Button Click="ChangeBook_Click"  Grid.Row="1" Name="ChangeBook" HorizontalAlignment="Right" Content="Change One Book"></Button>
+        <StackPanel Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="100" Height="100">
+            <TextBlock Name="OneBookBinding" Text="{x:Bind MyBook.Author}"></TextBlock>
         </StackPanel>
     </Grid>
 </Page>

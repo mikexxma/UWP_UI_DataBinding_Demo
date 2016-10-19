@@ -1,18 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using UWPDataBindingDemo.BookData;
 
 namespace UWPDataBindingDemo.BookData
 {
-    public class Book
+    public class Book : INotifyPropertyChanged
+
     {
         public string ImageCover { get; set; }
         public string Name { get; set; }
-        public string Author { get; set; }
+        public string Author { get; set;}
+
+
+        public void setAnther(string auther)
+        {
+            Author = auther;
+            OnPropertyChanged();
+        } 
+
+        public Book(String name, string author)
+        {
+            Name = name;
+            Author = author;
+          
+        }
+
+        public Book()
+        {
+           
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName]string propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                Debug.WriteLine("hello notification");
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
+
 
     public class BookCover
     {
